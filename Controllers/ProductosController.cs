@@ -10,15 +10,23 @@ public class ProductosController : Controller
     }
 
     //En el controlador de Productos : Listar, Crear, Modificar y Eliminar Productos
-
+    [HttpGet("ListarProductos")]
     public IActionResult Index()
     {
         return View(productoRepository.ObtenerProductos());
     }
 
+    [HttpGet("Crear")]
     public IActionResult Crear()
     {
         return View();
+    }
+
+    [HttpPost("CrearProducto")]
+    public IActionResult CrearProducto(Producto producto)
+    {
+        productoRepository.CrearProducto(producto);
+        return RedirectToAction("Index");
     }
 
     public IActionResult Modificar()
