@@ -18,9 +18,9 @@
                     <td>@producto.Precio.ToString("C")</td> <!--La opción "C" en el método ToString es un formato estándar que aplica automáticamente el símbolo de moneda y dos decimales al valor. Esto es útil cuando deseas mostrar precios de manera profesional y consistente con la moneda local.
     Por ejemplo, si Precio tiene el valor 1000, esta línea mostrará $1,000.00-->
                     <td>
-                        <a asp-controller="Productos" asp-action="ModificarProducto" asp-route-id="@producto.IdProducto"
-                            class="btn btn-warning">Editar</a>
-                        <a asp-controller="Productos" asp-action="EliminarProducto" asp-route-id="@producto.IdProducto"
+                        <a asp-controller="Productos" asp-action="Modificar" asp-route-id="@producto.IdProducto"
+                            class="btn btn-warning">Modificar</a>
+                        <a asp-controller="Productos" asp-action="Eliminar" asp-route-id="@producto.IdProducto"
                             class="btn btn-danger">Eliminar</a>
                     </td>
                 </tr>

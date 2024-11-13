@@ -1,0 +1,32 @@
+@model Producto
+
+<div class="text-center container-fluid">
+<h2>Eliminar Producto</h2>
+
+<div class="alert alert-warning" role="alert">
+    <strong>¿Estás seguro de que deseas eliminar el siguiente producto?</strong>
+</div>
+
+<div class="mb-3">
+    <label class="form-label"><strong>ID del Producto:</strong> @Model.IdProducto</label>
+</div>
+<div class="mb-3">
+    <label class="form-label"><strong>Descripción:</strong> @Model.Descripcion</label>
+</div>
+<div class="mb-3">
+    <label class="form-label"><strong>Precio:</strong> @Model.Precio.ToString("C")</label>
+</div>
+
+<!-- Formulario de confirmación -->
+<form method="post" asp-controller="Productos" asp-action="EliminarProducto" asp-route-id="@Model.IdProducto">
+    <input type="hidden" asp-for="IdProducto" />
+
+    <!-- Botones para confirmar o cancelar -->
+    <div class="mt-3">
+        <button type="submit" class="btn btn-danger">Eliminar Producto</button>
+        <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+    </div>
+</form>
+
+</div>
+

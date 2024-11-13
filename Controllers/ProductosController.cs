@@ -15,7 +15,7 @@ public class ProductosController : Controller
     {
         return View(productoRepository.ObtenerProductos());
     }
-
+    ///////////
     [HttpGet("Crear")]
     public IActionResult Crear()
     {
@@ -28,15 +28,31 @@ public class ProductosController : Controller
         productoRepository.CrearProducto(producto);
         return RedirectToAction("Index");
     }
-
-    public IActionResult Modificar()
+    /////////
+    [HttpGet]
+    public IActionResult Modificar(int id)
     {
-        return View();
+        return View(productoRepository.ObtenerProducto(id));
     }
 
-    public IActionResult EliminarProductos()
+    [HttpPost]
+    public IActionResult ModificarProducto(Producto producto)
     {
-        return View();
+        productoRepository.ModificarProducto(producto.IdProducto, producto);
+        return RedirectToAction("Index");
+    }
+    //////
+    [HttpGet]
+    public IActionResult Eliminar(int id)
+    {
+        return View(productoRepository.ObtenerProducto(id));
+    }
+
+    [HttpPost]
+    public IActionResult EliminarProducto(int id)
+    {
+        productoRepository.EliminarProducto(id);
+        return RedirectToAction ("Index"); 
     }
 
 }

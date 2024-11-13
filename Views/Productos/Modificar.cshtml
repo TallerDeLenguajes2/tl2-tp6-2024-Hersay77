@@ -1,0 +1,25 @@
+@model Producto 
+
+<h2>Editar Producto</h2> 
+
+<form asp-controller="Productos" asp-action="ModificarProducto" method="post"> 
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div> <!-- Muestra los errores de validación a nivel de modelo en caso de que existan, con el estilo de texto rojo. Cuando el formulario se envía y hay errores de validación a nivel de modelo (por ejemplo, si un campo requerido está vacío o si el formato de un campo es incorrecto), esos errores se capturan y se muestran dentro de este <div>. -->
+
+    <div class="form-group"> 
+        <label asp-for="Descripcion" class="control-label"></label> 
+        <input asp-for="Descripcion" class="form-control" /> 
+        <span asp-validation-for="Descripcion" class="text-danger"></span> <!-- Muestra los errores de validación específicos para "Descripcion", en caso de que los haya, en texto rojo. -->
+    </div>
+
+    <div class="form-group"> 
+        <label asp-for="Precio" class="control-label"></label> 
+        <input asp-for="Precio" class="form-control" /> 
+        <span asp-validation-for="Precio" class="text-danger"></span> <!-- Muestra los errores de validación específicos para "Precio", si los hay, en texto rojo. -->
+    </div>
+
+    <input type="hidden" asp-for="IdProducto" /> <!-- Genera un campo oculto para la propiedad "IdProducto", que no se muestra al usuario pero es necesario para identificar el producto al editarlo. Si el modelo que se pasa a la vista tiene un valor para IdProducto (por ejemplo, si es un producto que se está editando), ese valor se asignará automáticamente al campo oculto.-->
+
+    <div class="form-group"> <!-- Define un grupo de elementos para el botón de envío del formulario. -->
+        <input type="submit" value="Guardar" class="btn btn-primary" /> <!-- Genera un botón de tipo submit con el texto "Guardar" y la clase de Bootstrap "btn btn-primary" para darle estilo. -->
+    </div>
+</form> <!-- Cierra el formulario. -->
