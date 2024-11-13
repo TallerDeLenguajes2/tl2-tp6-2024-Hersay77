@@ -16,12 +16,19 @@ public class PresupuestosController : Controller
     }
     /////////////////////
 
-    
-    /*
-    En el controlador de Presupuestos: Listar, Crear, Modificar y Eliminar Presupuestos.
-        Tiene que poder cargar productos a un presupuesto específico
-        Tiene que poder ver un presupuesto con el listado de productos
-    correspondientes.
-    */
+    public IActionResult Crear()
+    {
+        return View();
+    }
 
+    public IActionResult CrearPresupuesto(Presupuesto presupuesto)
+    {
+        presupuestoRepository.CrearPresupuesto(presupuesto);
+        return RedirectToAction ("Index");
+    }
+
+    ////////////////////////////////
+    ///
+    
+    
 }
