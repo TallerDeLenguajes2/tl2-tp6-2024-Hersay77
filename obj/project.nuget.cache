@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "UDU57ow/izY=",
+  "dgSpecHash": "sPSk6bT0kro=",
   "success": true,
-  "projectFilePath": "C:\\Hersay\\Repositorios\\tl2-tp6-2024-Hersay77\\tl2-tp6-2024-Hersay77.csproj",
+  "projectFilePath": "c:\\Hersay\\Repositorios\\tl2-tp6-2024-Hersay77\\tl2-tp6-2024-Hersay77.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\HERNAN\\.nuget\\packages\\microsoft.data.sqlite\\9.0.0\\microsoft.data.sqlite.9.0.0.nupkg.sha512",
     "C:\\Users\\HERNAN\\.nuget\\packages\\microsoft.data.sqlite.core\\9.0.0\\microsoft.data.sqlite.core.9.0.0.nupkg.sha512",

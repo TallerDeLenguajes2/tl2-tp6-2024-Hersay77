@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Hersay\\Repositorios\\tl2-tp6-2024-Hersay77\\tl2-tp6-2024-Hersay77.csproj": {}
+    "c:\\Hersay\\Repositorios\\tl2-tp6-2024-Hersay77\\tl2-tp6-2024-Hersay77.csproj": {}
   },
   "projects": {
-    "C:\\Hersay\\Repositorios\\tl2-tp6-2024-Hersay77\\tl2-tp6-2024-Hersay77.csproj": {
+    "c:\\Hersay\\Repositorios\\tl2-tp6-2024-Hersay77\\tl2-tp6-2024-Hersay77.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Hersay\\Repositorios\\tl2-tp6-2024-Hersay77\\tl2-tp6-2024-Hersay77.csproj",
+        "projectUniqueName": "c:\\Hersay\\Repositorios\\tl2-tp6-2024-Hersay77\\tl2-tp6-2024-Hersay77.csproj",
         "projectName": "tl2-tp6-2024-Hersay77",
-        "projectPath": "C:\\Hersay\\Repositorios\\tl2-tp6-2024-Hersay77\\tl2-tp6-2024-Hersay77.csproj",
+        "projectPath": "c:\\Hersay\\Repositorios\\tl2-tp6-2024-Hersay77\\tl2-tp6-2024-Hersay77.csproj",
         "packagesPath": "C:\\Users\\HERNAN\\.nuget\\packages\\",
-        "outputPath": "C:\\Hersay\\Repositorios\\tl2-tp6-2024-Hersay77\\obj\\",
+        "outputPath": "c:\\Hersay\\Repositorios\\tl2-tp6-2024-Hersay77\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\HERNAN\\AppData\\Roaming\\NuGet\\NuGet.Config"
