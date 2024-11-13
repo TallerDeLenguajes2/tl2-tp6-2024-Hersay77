@@ -1,0 +1,42 @@
+@model List<Presupuesto>
+
+<div class="text-center">
+<h2>Lista de Presupuestos</h2>
+
+<table class="table table-bordered"> <!--Inicia una tabla con bordes alrededor de cada celda y estilos de Bootstrap-->
+    <thead> <!--Encabezado de tabla-->
+        <tr>
+            <th>Destinatario</th> 
+            <th>Fecha de Creacion</th> 
+            <th>Acciones</th> 
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var presupuesto in Model) 
+        {
+        <tr>
+            <td>@presupuesto.NombreDestinatario</td> 
+            <td>@presupuesto.FechaCreacion.ToShortDateString()</td>
+            <td><!-- Cada una de estas líneas genera un botón que realiza una acción específica sobre el presupuesto actual -->
+                <a asp-controller="Presupuestos" asp-action="AgregarProductoAPresupuesto"
+                    asp-route-id="@presupuesto.IdPresupuesto" class="btn btn-success">Agregar Producto</a>
+                <a asp-controller="Presupuestos" asp-action="EliminarProductoAPresupuesto"
+                    asp-route-id="@presupuesto.IdPresupuesto" class="btn btn-danger">Eliminar Producto</a>
+                <a asp-controller="Presupuestos" asp-action="DetallesDelPresupuesto"
+                    asp-route-id="@presupuesto.IdPresupuesto" class="btn btn-info">Detalles</a>
+                <a asp-controller="Presupuestos" asp-action="ModificarPresupuesto"
+                    asp-route-id="@presupuesto.IdPresupuesto" class="btn btn-warning">Editar</a>
+                <a asp-controller="Presupuestos" asp-action="EliminarPresupuesto"
+                    asp-route-id="@presupuesto.IdPresupuesto" class="btn btn-danger">Eliminar</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+
+
+<div class="text-center">
+    <a asp-controller="Presupuestos" asp-action="AltaPresupuesto" class="btn btn-success mb-2">Alta presupuesto</a>
+</div> <!--Se crea un botón en el centro de la página que redirige a la acción 'AltaPresupuesto' del controlador 'Presupuestos'.
+// Este botón permite crear un nuevo presupuesto y tiene estilos de Bootstrap aplicados.-->
+</div>
