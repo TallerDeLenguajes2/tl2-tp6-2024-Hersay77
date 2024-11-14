@@ -105,6 +105,9 @@ public class PresupuestoRepository : IPresupuestosRepository
         {
             return false;
         }
+
+        ////agregar control de si ya existe en presupuesto detalle la combinacion idresupuesto e idetalle 
+        ///
         string query = @"INSERT INTO PresupuestosDetalle (idPresupuesto, idProducto, Cantidad) VALUES (@idPresupuesto, @idProducto, @cantidad);";
         using (SqliteConnection connection = new SqliteConnection(cadenaDeConexion))
         {
@@ -118,6 +121,20 @@ public class PresupuestoRepository : IPresupuestosRepository
         }
 
         return true;
+    }
+    public void EliminarProducto(int idPresupuesto, int idProducto)
+    {
+        string query = @"DELETE FROM PresupuestosDetalle WHERE idPresupuesto = @idPresupuesto AND idProducto = @idProducto";
+
+        using (SqliteConnection connection = new SqliteConnection(cadenaDeConexion))
+        {
+            connection.Open();
+            SqliteCommand command = new SqliteCommand(query, connection);
+            command.Parameters.AddWithValue("@idPresupuesto", idPresupuesto);
+            command.Parameters.AddWithValue("@idProducto", idProducto);
+            int retorn = command.ExecuteNonQuery();
+            connection.Close();
+        }
     }
 
     public bool EliminarPresupuesto(int idPresupuesto)

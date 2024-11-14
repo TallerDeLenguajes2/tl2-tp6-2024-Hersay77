@@ -1,0 +1,41 @@
+@model PresupuestoDetalleViewModel
+
+<h2>Agregar Producto al Presupuesto</h2>
+
+<!-- Lista de productos con botón para seleccionar el idProducto -->
+@foreach (var producto in Model.Productos)
+{
+    <div class="product-row">
+        <p>
+            <strong>@producto.Descripcion</strong><br />
+            Precio: @producto.Precio.ToString("C")<br />
+
+            <!-- Botón que establece el idProducto en el formulario inferior -->
+            <button type="button" class="btn btn-secondary" onclick="setProductoId(@producto.IdProducto)">
+                Seleccionar
+            </button>
+        </p>
+    </div>
+}
+
+<!-- Formulario para agregar producto al presupuesto -->
+<form method="post" asp-action="AgregarProductoEnPresupuesto">
+    <input type="hidden" name="idPresupuesto" value="@Model.IdPresupuesto" />
+
+    <!-- Campo para idProducto que se completa al seleccionar un producto arriba -->
+    <label for="idProducto">ID del Producto:</label>
+    <input type="text" id="idProducto" name="idProducto" readonly required />
+
+    <!-- Campo para ingresar la cantidad -->
+    <label for="cantidad">Cantidad:</label>
+    <input type="number" id="cantidad" name="cantidad" min="1" required />
+
+    <button type="submit" class="btn btn-primary" style="margin-top: 10px;">Agregar Producto</button>
+</form>
+
+<script>
+    // Función que establece el idProducto en el campo del formulario
+    function setProductoId(idProducto) {
+        document.getElementById('idProducto').value = idProducto;
+    }
+</script>

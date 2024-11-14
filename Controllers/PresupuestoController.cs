@@ -29,7 +29,6 @@ public class PresupuestosController : Controller
 
     ////////////////////////////////
 
-
     [HttpGet]
     public IActionResult ModificarPresupuesto(int id)
     {
@@ -59,6 +58,46 @@ public class PresupuestosController : Controller
     }
 
     //////////////////////////
+
+    [HttpGet]
+    public IActionResult AgregarProductoAPresupuesto(int id)
+    {
+        ProductoRepository productoRepository = new ProductoRepository("Data Source=db/Tienda.db;Cache=Shared");
+        List<Producto> productos = productoRepository.ObtenerProductos();
+        PresupuestoDetalleViewModel presupuestoDetalleViewModel = new PresupuestoDetalleViewModel(id, productos);
+
+        return View(presupuestoDetalleViewModel);
+    }
+
+    [HttpPost]
+    public IActionResult AgregarProductoEnPresupuesto(int idPresupuesto, int idProducto, int cantidad)
+    {
+        presupuestoRepository.AgregarProductoYCantidad(idPresupuesto, idProducto, cantidad);
+        return RedirectToAction("Index");
+    }
+
+    //////////////////
+    [HttpGet]
+    public IActionResult DetallesDelPresupuesto(int id)
+    {
+        return View(presupuestoRepository.ObtenerPresupuesto(id));
+    }
+
+    ///////////////////
+
+    public IActionResult EliminarProducto(int id)
+    {
+       
+        return View( presupuestoRepository.ObtenerPresupuesto(id));
+    }
+
+    [HttpPost]
+    public IActionResult EliminarProductoDePresupuesto(int idPresupuesto, int idProducto)
+    {
+        presupuestoRepository.EliminarProducto(idPresupuesto, idProducto);
+        return RedirectToAction("Index");
+    }
+
 
 
 }
