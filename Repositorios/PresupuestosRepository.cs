@@ -52,6 +52,8 @@ public class PresupuestoRepository : IPresupuestosRepository
     public Presupuesto ObtenerPresupuesto(int idPresupuesto)
     {
         Presupuesto presupuesto = null;
+
+        //a diferencia del tp5 uso left join para las consultas asi devuelva filas con los valores DBnull en caso de que solo haya datos en tabla presupuestos y no se hallan agregado detalles por lo tanto sno habra productos asociados
         string query = @"SELECT 
                             P.idPresupuesto,
                             P.NombreDestinatario,
@@ -63,9 +65,9 @@ public class PresupuestoRepository : IPresupuestosRepository
                             (PR.Precio * PD.Cantidad) AS Subtotal
                         FROM
                             Presupuestos P
-                        JOIN
+                        LEFT JOIN
                             PresupuestosDetalle PD ON P.idPresupuesto = PD.idPresupuesto
-                        JOIN
+                        LEFT JOIN
                             Productos PR ON PD.idProducto = PR.idProducto
                         WHERE
                             P.idPresupuesto = @idPresupuesto";
@@ -82,14 +84,17 @@ public class PresupuestoRepository : IPresupuestosRepository
                     {
                         presupuesto = new Presupuesto(Convert.ToInt32(reader["idPresupuesto"]), reader["NombreDestinatario"].ToString(), Convert.ToDateTime(reader["FechaCreacion"]));
                     }
-                    Producto producto = new Producto(Convert.ToInt32(reader["idProducto"]), reader["Producto"].ToString(), Convert.ToInt32(reader["Precio"]));
-                    PresupuestosDetalle detalle = new PresupuestosDetalle(producto, Convert.ToInt32(reader["Cantidad"]));
-                    presupuesto.Detalle.Add(detalle);
+                    if (reader["idProducto"] != DBNull.Value) //se controla que en la fila no haya un valor nulo entonces no se intenta convertir ni agregar detales al presupuesto
+                    //tambien podria usar if (!reader.IsDBNull(reader.GetOrdinal("idProducto"))) Aquí, reader.GetOrdinal("idProducto") busca el índice de la columna idProducto en la fila actual, y luego IsDBNull() verifica si el valor en esa posición es NULL. Por si el orden de la consulta cambia y el siguiente datos a obtener no es idproducto, no importara ya que devolvera DBnull el indice de idproducto sea en el orden que este en la consulta
+                    {
+                        Producto producto = new Producto(Convert.ToInt32(reader["idProducto"]), reader["Producto"].ToString(), Convert.ToInt32(reader["Precio"]));
+                        PresupuestosDetalle detalle = new PresupuestosDetalle(producto, Convert.ToInt32(reader["Cantidad"]));
+                        presupuesto.Detalle.Add(detalle);
+                    }
                 }
             }
             connection.Close();
         }
-
         return presupuesto;
     }
 
@@ -135,5 +140,21 @@ public class PresupuestoRepository : IPresupuestosRepository
             connection.Close();
         }
         return true;
+    }
+
+    public void ModificarPresupuesto(Presupuesto presupuesto)
+    {
+        string query = @"UPDATE Presupuestos SET NombreDestinatario = @destinatario, FechaCreacion = @fecha WHERE idPresupuesto = @Id";
+
+        using (SqliteConnection connection = new SqliteConnection(cadenaDeConexion))
+        {
+            connection.Open();
+            SqliteCommand command = new SqliteCommand(query, connection);
+            command.Parameters.AddWithValue("@destinatario", presupuesto.NombreDestinatario);
+            command.Parameters.AddWithValue("@fecha", presupuesto.FechaCreacion);
+            command.Parameters.AddWithValue("@Id", presupuesto.IdPresupuesto);
+            command.ExecuteNonQuery();
+            connection.Close();
+        }
     }
 }
